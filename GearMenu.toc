@@ -29,9 +29,6 @@ Code\GM_ItemManager.lua
 Code\GM_ItemHelper.lua
 Code\GM_AddonOptions.lua
 
-# debug only
-Code\GM_Debug.lua
-
 # Gui
 Gui\GM_Gui.lua
 Gui\GM_NavigationMenu.lua

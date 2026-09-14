@@ -32,6 +32,6 @@ GM_ENVIRONMENT = {
   ADDON_NAME_SHORT = "GM",
   ADDON_VERSION = "1.2.2",
   ADDON_IDENTIFIER = "com.ragedunicorn.wow.vanilla.gearmenu",
-  LOG_LEVEL = 4,
-  LOG_EVENT = true
+  LOG_LEVEL = 1,
+  LOG_EVENT = false
 }

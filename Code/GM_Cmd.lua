@@ -44,11 +44,10 @@ end
   Setup slash command handler
 ]]--
 function me.SetupSlashCmdList()
-  SLASH_GEARMENU1 = "/gm"
-  SLASH_GEARMENU2 = "/gearmenu"
+  SLASH_GEARMENU1 = "/gearmenu"
 
   SlashCmdList["GEARMENU"] = function(msg)
-    mod.logger.LogDebug(me.tag, "/gm passed argument: " .. msg)
+    mod.logger.LogDebug(me.tag, "/gearmenu passed argument: " .. msg)
 
     if msg == "" or msg == "info" then
       ShowInfoMessage()
