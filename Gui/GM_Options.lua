@@ -29,12 +29,23 @@ mod.opt = me
 
 me.tag = "Options"
 
+-- allow the escape key to close the options window, consistent with the
+-- rest of the game's UI panels (e.g. bags, character sheet, spellbook)
+table.insert(UISpecialFrames, GM_CONSTANTS.ELEMENT_OPTIONS_FRAME)
+
 function me.InitOptionsMenu()
+  local optionsFrame = getglobal(GM_CONSTANTS.ELEMENT_OPTIONS_FRAME)
+
+  if optionsFrame:IsShown() then
+    optionsFrame:Hide()
+    return
+  end
+
   -- set version title
   getglobal(GM_CONSTANTS.ELEMENT_OPTIONS_TITLE):SetText(GM_ENVIRONMENT.ADDON_NAME ..
     " " .. GM_ENVIRONMENT.ADDON_VERSION)
   -- show optionsframe
-  getglobal(GM_CONSTANTS.ELEMENT_OPTIONS_FRAME):Show()
+  optionsFrame:Show()
 end
 
 --[[

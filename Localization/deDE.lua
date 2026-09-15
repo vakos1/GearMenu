@@ -5,7 +5,7 @@ if (GetLocale() == "deDE") then
   gm.L["name"] = "GearMenu"
 
   -- console
-  gm.L["help"] = "|cFFFFFF00(%s)|r: Benutze |cFFFFFF00/gearmenu|r für eine Liste der verfügbaren Optionen"
+  gm.L["help"] = "|cFFFFFF00(%s)|r: Benutze |cFFFFFF00/gm|r oder |cFFFFFF00/gearmenu|r für eine Liste der verfügbaren Optionen"
   gm.L["show"] = "|cFFFFFF00show|r - anzeigen GearMenu"
   gm.L["hide"] = "|cFFFFFF00hide|r - ausblenden GearMenu"
   gm.L["opt"] = "|cFFFFFF00opt|r - zeige Optionsmenu an"

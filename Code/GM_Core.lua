@@ -68,7 +68,9 @@ function me.OnEvent()
     me.gui.ShowKeyBindings()
   elseif event == "ACTIONBAR_UPDATE_COOLDOWN" then
     me.logger.LogEvent(me.tag, "ACTIONBAR_UPDATE_COOLDOWN")
-    me.itemManager.UpdateCooldownForAllWornItems()
+    if getglobal(GM_CONSTANTS.ELEMENT_MAIN_FRAME):IsVisible() then
+      me.itemManager.UpdateCooldownForAllWornItems()
+    end
   elseif event == "UNIT_INVENTORY_CHANGED" and arg1 == "player" then
     me.logger.LogEvent(me.tag, "UNIT_INVENTORY_CHANGED")
     -- update all registered worn items

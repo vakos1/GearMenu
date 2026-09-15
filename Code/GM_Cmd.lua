@@ -41,24 +41,71 @@ local function ShowInfoMessage()
 end
 
 --[[
+  Looks through every currently registered slash command (SLASH_*) to find
+  one whose text is exactly "/gm" and returns the handler function bound to
+  it. This lets us chain to whatever "/gm" already did (e.g. the built-in
+  GM ticket window) before GearMenu adds its own "/gm" handling, instead of
+  silently replacing it.
+]]--
+local function FindExistingGmHandler()
+  for key, value in pairs(_G) do
+    if type(key) == "string" and type(value) == "string" and value == "/gm" then
+      local cmdKey = string.gsub(key, "^SLASH_", "")
+      cmdKey = string.gsub(cmdKey, "%d+$", "")
+
+      if string.find(key, "^SLASH_") and SlashCmdList[cmdKey] then
+        return SlashCmdList[cmdKey]
+      end
+    end
+  end
+
+  return nil
+end
+
+--[[
+  Shared handling for the GearMenu subcommands, used by both "/gm" and
+  "/gearmenu".
+]]--
+local function HandleGearMenuCommand(msg)
+  if msg == "" or msg == "info" then
+    ShowInfoMessage()
+  elseif msg == "opt" then
+    mod.opt.InitOptionsMenu()
+  elseif msg == "show" then
+    mod.gui.ShowMainFrame()
+  elseif msg == "hide" then
+    mod.gui.HideMainFrame()
+  elseif msg == "rl" or msg == "reload" then
+    ReloadUI()
+  end
+end
+
+--[[
   Setup slash command handler
 ]]--
 function me.SetupSlashCmdList()
+  -- capture the built-in "/gm" handler (e.g. GM ticket window) before we
+  -- register our own, so bare "/gm" still opens it as normal
+  local existingGmHandler = FindExistingGmHandler()
+
   SLASH_GEARMENU1 = "/gearmenu"
 
   SlashCmdList["GEARMENU"] = function(msg)
     mod.logger.LogDebug(me.tag, "/gearmenu passed argument: " .. msg)
+    HandleGearMenuCommand(msg)
+  end
 
-    if msg == "" or msg == "info" then
-      ShowInfoMessage()
-    elseif msg == "opt" then
-      mod.opt.InitOptionsMenu()
-    elseif msg == "show" then
-      mod.gui.ShowMainFrame()
-    elseif msg == "hide" then
-      mod.gui.HideMainFrame()
-    elseif msg == "rl" or msg == "reload" then
-      ReloadUI()
+  -- registered as its own separate command (not shared with /gearmenu)
+  -- so a bare "/gm" can still be told apart from a bare "/gearmenu"
+  SLASH_GEARMENUGM1 = "/gm"
+
+  SlashCmdList["GEARMENUGM"] = function(msg)
+    mod.logger.LogDebug(me.tag, "/gm passed argument: " .. msg)
+
+    if msg == "" and existingGmHandler then
+      existingGmHandler(msg)
+    else
+      HandleGearMenuCommand(msg)
     end
   end
 end

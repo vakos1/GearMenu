@@ -38,6 +38,8 @@ me.baggedItems = {}
 ]]--
 function me.ShowMainFrame()
   getglobal(GM_CONSTANTS.ELEMENT_MAIN_FRAME):Show()
+  -- cooldowns are skipped while hidden, so refresh them immediately on show
+  mod.itemManager.UpdateCooldownForAllWornItems()
 end
 
 --[[

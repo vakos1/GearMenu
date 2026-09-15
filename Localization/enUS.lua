@@ -4,7 +4,7 @@ gm.L = {}
 gm.L["name"] = "GearMenu"
 
 -- console
-gm.L["help"] = "|cFFFFFF00(%s)|r: Use |cFFFFFF00/gearmenu|r for a list of options"
+gm.L["help"] = "|cFFFFFF00(%s)|r: Use |cFFFFFF00/gm|r or |cFFFFFF00/gearmenu|r for a list of options"
 gm.L["show"] = "|cFFFFFF00show|r - display GearMenu"
 gm.L["hide"] = "|cFFFFFF00hide|r - hide GearMenu"
 gm.L["opt"] = "|cFFFFFF00opt|r - display Optionsmenu"
